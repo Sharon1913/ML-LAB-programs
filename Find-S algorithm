@@ -1,0 +1,26 @@
+import numpy as np
+import pandas as pd
+
+data = pd.read_csv('weather_dataset.csv')
+target = np.array(data)[:, -1]
+concepts = np.array(data)[:, :-1]
+
+def train(con, tar):
+    for i, val in enumerate(tar):
+        if val == 'yes':
+            specific_h = con[i].copy()
+            print(specific_h)
+            break
+
+    for i, val in enumerate(con):
+        if tar[i] == 'yes':
+            for x in range(len(specific_h)):
+                if val[x] != specific_h[x]:
+                    specific_h[x] = '?'
+                    print(specific_h)
+                else:
+                    pass
+
+    return specific_h
+
+print(train(concepts, target))
